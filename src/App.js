@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import QRScanner from './component/qrscanner/QrScanner';
+import Login from './component/auth/login/Login';
+import Register from './component/auth/register/register';
+import Home from './component/home/home'; 
 
-function App() {
+const App = () => {
+  const [currentUser, setCurrentUser] = useState('');
+  const [qrcode,setqrcode] = useState('')
+  console.log("current user app.js",currentUser)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<QRScanner />} />
+        <Route path="/login" element={<Login  setCurrentUser={setCurrentUser} setqrcode={setqrcode}/>} />
+        <Route path="/register" element={<Register currentUser={currentUser} qrcode={qrcode} />} />
+        <Route path="/home" element={<Home />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
