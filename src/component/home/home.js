@@ -14,11 +14,18 @@ const Home = () => {
     }
   };
 
+  const handleMenuClick = () => {
+    navigate('/menu'); // Navigate to the menu page
+  };
+
   return (
     <div className="home-container">
       <h1>Home</h1>
       <button className="logout-button" onClick={handleLogout}>
         Log Out
+      </button>
+      <button className="menu-button" onClick={handleMenuClick}>
+        Menu
       </button>
     </div>
   );

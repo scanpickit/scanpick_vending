@@ -1,37 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { setDoc, doc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
+import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../../firebase/firebase';
 import { doSignOut } from '../../../firebase/auth';
 
-const Register = ({ currentUser,qrcode }) => {
+const Register = ({ currentUser, qrcode }) => {
   const [name, setName] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
-  const [qr, setQr] = useState('');
   const navigate = useNavigate();
-  const location = useLocation();
 
-
-
-  useEffect(() => {
-    console.log(qrcode)
-      setQr(qrcode); 
-  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const email = currentUser; 
-    console.log("register page current user",currentUser)
-    console.log("register page email",email)
+    console.log("register page current user", currentUser);
+    console.log("register page email", email);
+
     try {
-      console.log(email)
       // Save user details and QR code data to Firestore
-      await setDoc(doc(db, 'users', email), {
+      await updateDoc(doc(db, 'users', email, 'Account', 'Details'), {
         name,
         city,
         state,
-        qr, // Store QR code data
+        
       });
       console.log('User data saved successfully');
       navigate('/home'); // Redirect to home or another page after registration
