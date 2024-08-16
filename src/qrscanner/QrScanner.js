@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import WebcamCapture from "./WebcamCapture";
 import jsQR from 'jsqr';
 
-const QRScanner = () => {
-  const [qrCode, setQrCode] = useState("");
+const QRScanner = ({qrCode,setQrCode}) => {
   const navigate = useNavigate();
 
   const handleScan = (imageSrc) => {
